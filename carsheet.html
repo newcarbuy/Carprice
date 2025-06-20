@@ -3,11 +3,80 @@
 <head>
   <title>CarWorld Live Dashboard</title>
   <script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
-  <style>
-    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
-    img { width: 100px; border-radius: 8px; }
-  </style>
+ <style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+  }
+
+  h1, h2 {
+    text-align: center;
+  }
+
+  select {
+    margin: 10px auto;
+    display: block;
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+
+  th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  img {
+    width: 100px;
+    border-radius: 8px;
+  }
+
+  /* ✅ Responsive Design */
+  @media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+      width: 100%;
+    }
+
+    thead {
+      display: none;
+    }
+
+    tr {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+
+    td {
+      text-align: left;
+      padding-left: 50%;
+      position: relative;
+    }
+
+    td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      font-weight: bold;
+    }
+
+    img {
+      width: 90%;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+</style>
+
 </head>
 <body>
   <h2>Filter by Brand</h2>
