@@ -31,30 +31,58 @@
   </table>
 
   <script>
-    function showInfo(data) {
-      const tbody = document.querySelector("#car-table tbody");
-      data.forEach(car => {
-        const row = `
-          <tr>
-            <td><img src="${car.ImageURL}" alt="${car.Model}" /></td>
-            <td>${car.Brand}</td>
-            <td>${car.Model}</td>
-            <td>${car.City}</td>
-            <td>${car.Price}</td>
-            <td>${car.OnRoadPrice}</td>
-          </tr>
-        `;
-        tbody.innerHTML += row;
-      });
-    }
+  let fullData = [];
 
-    window.addEventListener('DOMContentLoaded', () => {
-      Tabletop.init({
-        key: 'https://docs.google.com/spreadsheets/d/1Jzyd6gIn2seO_vPzCdhsXHMnMb3dxlMoEM0iGBCxWvk/pubhtml',
-        callback: showInfo,
-        simpleSheet: true
-      });
+  function showInfo(data) {
+    fullData = data;
+    populateBrandFilter(data);
+    renderTable(data);
+  }
+
+  function populateBrandFilter(data) {
+    const brandSet = new Set();
+    data.forEach(car => brandSet.add(car.Brand));
+    const brandFilter = document.getElementById("brandFilter");
+    brandSet.forEach(brand => {
+      const option = document.createElement("option");
+      option.value = brand;
+      option.textContent = brand;
+      brandFilter.appendChild(option);
     });
+
+    brandFilter.addEventListener("change", () => {
+      const selected = brandFilter.value;
+      const filtered = selected ? fullData.filter(car => car.Brand === selected) : fullData;
+      renderTable(filtered);
+    });
+  }
+
+  function renderTable(data) {
+    const tbody = document.querySelector("#car-table tbody");
+    tbody.innerHTML = "";
+    data.forEach(car => {
+      const row = `
+        <tr>
+          <td><img src="${car.ImageURL}" alt="${car.Model}" /></td>
+          <td>${car.Brand}</td>
+          <td>${car.Model}</td>
+          <td>${car.City}</td>
+          <td>${car.Price}</td>
+          <td>${car.OnRoadPrice}</td>
+        </tr>
+      `;
+      tbody.innerHTML += row;
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    Tabletop.init({
+      key: 'https://docs.google.com/spreadsheets/d/1Jzyd6gIn2seO_vPzCdhsXHMnMb3dxlMoEM0iGBCxWvk/pubhtml',
+      callback: showInfo,
+      simpleSheet: true
+    });
+  });
+
   </script>
 
 </body>
