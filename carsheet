@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CarWorld Live Dashboard</title>
+  <script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+    img { width: 100px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <h1>🚗 CarWorld - Live Car Data</h1>
+  <table id="car-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>City</th>
+        <th>Price</th>
+        <th>On-Road Price</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    function showInfo(data) {
+      const tbody = document.querySelector("#car-table tbody");
+      data.forEach(car => {
+        const row = `
+          <tr>
+            <td><img src="${car.ImageURL}" alt="${car.Model}" /></td>
+            <td>${car.Brand}</td>
+            <td>${car.Model}</td>
+            <td>${car.City}</td>
+            <td>${car.Price}</td>
+            <td>${car.OnRoadPrice}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      Tabletop.init({
+        key: 'https://docs.google.com/spreadsheets/d/1Jzyd6gIn2seO_vPzCdhsXHMnMb3dxlMoEM0iGBCxWvk/pubhtml',
+        callback: showInfo,
+        simpleSheet: true
+      });
+    });
+  </script>
+
+</body>
+</html>
