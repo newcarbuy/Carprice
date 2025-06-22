@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CarWorld - Explore Cars</title>
+  <title>Car Dashboard</title>
+  <script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background: #1a1a1a; color: white; padding: 20px; text-align: center; }
-    nav a { margin: 10px; color: white; text-decoration: none; }
-    section { padding: 20px; }
-    .brand { background: #f2f2f2; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
-    .model { margin-left: 20px; }
-    footer { background: #1a1a1a; color: white; text-align: center; padding: 10px; }
+    /* 👇 Yahi CSS yaha paste karo */
+    .car-card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .car-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      width: 260px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    }
+
+    .car-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .car-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .car-card p {
+      font-size: 14px;
+      margin: 4px 0;
+    }
   </style>
 </head>
+
 <body>
 
   <header>
