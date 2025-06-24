@@ -100,54 +100,63 @@
   </table>
 
   <script>
-  function showInfo(data) {
-    const container = document.getElementById("car-container");
-    container.innerHTML = "";
+  let fullData = [];
 
-    // Group cars by brand
-    const grouped = {};
-    data.forEach(car => {
-      if (!grouped[car.Brand]) grouped[car.Brand] = [];
-      grouped[car.Brand].push(car);
-    });
+function showInfo(data) {
+  fullData = data;
+  renderFilteredData(data); // initial render
 
-    for (const brand in grouped) {
-      const brandSection = document.createElement("div");
-      brandSection.innerHTML = `<h2>🚗 ${brand}</h2>`;
-      
-      const cardContainer = document.createElement("div");
-      cardContainer.className = "car-card-container";
-
-      grouped[brand].forEach(car => {
-        const card = document.createElement("div");
-        card.className = "car-card";
-        card.innerHTML = `
-          <img src="${car.ImageURL}" alt="${car.Model}">
-          <h3>${car.Model}</h3>
-          <p><strong>City:</strong> ${car.City}</p>
-          <p><strong>Ex Showroom:</strong> ${car.ExShowroom}</p>
-          <p><strong>RTO:</strong> ${car.RTO}</p>
-          <p><strong>Insurance:</strong> ${car.Insurance}</p>
-          <p><strong>Showroom Discount:</strong> ${car.ShowroomDiscount}</p>
-          <p><strong>Brand Discount:</strong> ${car.BrandDiscount}</p>
-          <p><strong>Additional Discount:</strong> ${car.AdditionalDiscount}</p>
-          <p><strong>On Road Price:</strong> ${car.OnRoadPrice}</p>
-        `;
-        cardContainer.appendChild(card);
-      });
-
-      brandSection.appendChild(cardContainer);
-      container.appendChild(brandSection);
-    }
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    Tabletop.init({
-      key: 'https://docs.google.com/spreadsheets/d/1Jzyd6gIn2seO_vPzCdhsXHMnMb3dxlMoEM0iGBCxWvk/pubhtml',
-      callback: showInfo,
-      simpleSheet: true
-    });
+  document.getElementById("searchInput").addEventListener("input", function () {
+    const keyword = this.value.toLowerCase();
+    const filtered = fullData.filter(car =>
+      car.Brand.toLowerCase().includes(keyword) ||
+      car.Model.toLowerCase().includes(keyword) ||
+      car.City.toLowerCase().includes(keyword)
+    );
+    renderFilteredData(filtered);
   });
+}
+
+function renderFilteredData(data) {
+  const container = document.getElementById("car-container");
+  container.innerHTML = "";
+
+  const grouped = {};
+  data.forEach(car => {
+    if (!grouped[car.Brand]) grouped[car.Brand] = [];
+    grouped[car.Brand].push(car);
+  });
+
+  for (const brand in grouped) {
+    const brandSection = document.createElement("div");
+    brandSection.innerHTML = `<h2>🚗 ${brand}</h2>`;
+
+    const cardContainer = document.createElement("div");
+    cardContainer.className = "car-card-container";
+
+    grouped[brand].forEach(car => {
+      const card = document.createElement("div");
+      card.className = "car-card";
+      card.innerHTML = `
+        <img src="${car.ImageURL}" alt="${car.Model}">
+        <h3>${car.Model}</h3>
+        <p><strong>City:</strong> ${car.City}</p>
+        <p><strong>Ex Showroom:</strong> ${car.ExShowroom}</p>
+        <p><strong>RTO:</strong> ${car.RTO}</p>
+        <p><strong>Insurance:</strong> ${car.Insurance}</p>
+        <p><strong>Showroom Discount:</strong> ${car.ShowroomDiscount}</p>
+        <p><strong>Brand Discount:</strong> ${car.BrandDiscount}</p>
+        <p><strong>Additional Discount:</strong> ${car.AdditionalDiscount}</p>
+        <p><strong>On Road Price:</strong> ${car.OnRoadPrice}</p>
+      `;
+      cardContainer.appendChild(card);
+    });
+
+    brandSection.appendChild(cardContainer);
+    container.appendChild(brandSection);
+  }
+}
+
 </script>
 
 
