@@ -80,24 +80,18 @@
 </head>
 <body>
   <h2>Filter by Brand</h2>
+  
 <select id="brandFilter">
   <option value="">All Brands</option>
 </select>
 
   <h1>🚗 CarWorld - Live Car Data</h1>
-  <table id="car-table">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Brand</th>
-        <th>Model</th>
-        <th>City</th>
-        <th>Price</th>
-        <th>On-Road Price</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+<h2>Search Cars</h2>
+<input type="text" id="searchInput" placeholder="Search by model, brand, or city..." />
+
+<!-- 🧱 Dynamic car content will be inserted here -->
+<div id="car-container"></div>
+
 
   <script>
   let fullData = [];
@@ -126,6 +120,7 @@ function renderFilteredData(data) {
     if (!grouped[car.Brand]) grouped[car.Brand] = [];
     grouped[car.Brand].push(car);
   });
+
 
   for (const brand in grouped) {
     const brandSection = document.createElement("div");
