@@ -15,21 +15,14 @@ fetch(SHEET_CSV_URL)
 
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>
-          <img src="\${brandImg}" width="40"><br>
-          <img src="\${modelImg}" width="100">
-        </td>
-        <td>\${brand}</td>
-        <td>\${model}</td>
-        <td>\${exShow}</td>
-        <td>\${rto}</td>
-        <td>\${insurance}</td>
-        <td>\${showroomDisc}</td>
-        <td>\${brandDisc}</td>
-        <td>\${addDisc}</td>
-        <td>\${onRoad}</td>
-        <td>\${mileage}</td>
-      `;
+  <td>
+    <img src="\${brandImg}" width="40"><br>
+    <img src="\${modelImg}" width="100">
+  </td>
+  <td>\${brand}</td>
+  ...
+`;
+
       tbody.appendChild(tr);
     });
   })
