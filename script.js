@@ -9,7 +9,7 @@ fetch(SHEET_CSV_URL)
 
     data.forEach(row => {
       const cols = row.split(',');
-      if (cols.length < 11) return;
+      if (cols.length < 12) return;
 
       const [brandImg, modelImg, brand, model, exShow, rto, insurance, showroomDisc, brandDisc, addDisc, onRoad, mileage] = cols;
 
