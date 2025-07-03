@@ -1,3 +1,5 @@
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Ps-g1wRp1Q1_i6lx9_u9zBaSQ61S-mvsKB5OKcZLTms/export?format=csv';
+
 fetch(SHEET_CSV_URL)
   .then(res => res.text())
   .then(csv => {
