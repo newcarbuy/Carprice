@@ -57,7 +57,7 @@ h1 {
 .label {
   font-weight: bold;
   color: #333;
-  width: 160px; /* fixed width for alignment */
+  width: 140px; /* fixed width for alignment */
   display: inline-block;
 }
 
