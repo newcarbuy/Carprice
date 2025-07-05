@@ -1,51 +1,28 @@
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Ps-g1wRp1Q1_i6lx9_u9zBaSQ61S-mvsKB5OKcZLTms/export?format=csv';
+
+const SHEET_CSV_URL =
+  "https://docs.google.com/spreadsheets/d/1Ps-g1wRp1Q1_i6lx9_u9zBaSQ61S-mvsKB5OKcZLTms/export?format=csv";
 
 fetch(SHEET_CSV_URL)
-  .then(res => res.text())
-  .then(csv => {
-    const rows = csv.split('\n');
-    const data = rows.slice(1);
-    const container = document.getElementById('car-container');
+  .then((res) => res.text())
+  .then((csv) => {
+    const rows = csv.trim().split("\n");
+    const data = rows.slice(1).map((row) => row.split(","));
 
-    data.forEach(row => {
-      const cols = row.split(',');
-      if (cols.length < 11) return;
+    const html = [];
+    html.push("<table>");
+    html.push("<tr><th>Feature</th>" + data.map(d => "<th>" + d[12] + "</th>").join("") + "</tr>"); // Model Names
+    html.push("<tr><td>Image</td>" + data.map(d => "<td><img src='" + d[1] + "' class='model-img'></td>").join("") + "</tr>");
+    html.push("<tr><td>Mileage</td>" + data.map(d => "<td>" + d[2] + "</td>").join("") + "</tr>");
+    html.push("<tr><td>Ex-Showroom</td>" + data.map(d => "<td>" + d[3] + "</td>").join("") + "</tr>");
+    html.push("<tr><td>RTO</td>" + data.map(d => "<td>" + d[4] + "</td>").join("") + "</tr>");
+    html.push("<tr><td>Insurance</td>" + data.map(d => "<td>" + d[5] + "</td>").join("") + "</tr>");
+    html.push("<tr><td>Editinal</td>" + data.map(d => "<td>" + d[6] + "</td>").join("") + "</tr>");
+    html.push("<tr><td>Showroom Discount</td>" + data.map(d => "<td>" + d[7] + "</td>").join("") + "</tr>");
+    html.push("<tr><td>Brand Discount</td>" + data.map(d => "<td>" + d[8] + "</td>").join("") + "</tr>");
+    html.push("<tr><td>Additional Discount</td>" + data.map(d => "<td>" + d[9] + "</td>").join("") + "</tr>");
+    html.push("<tr><td>On-Road Price</td>" + data.map(d => "<td>" + d[10] + "</td>").join("") + "</tr>");
+    html.push("</table>");
 
-      const [brandImg, modelImg, mileage, exShow, rto, insurance, editinal, showroomDisc, brandDisc, addDisc, onRoad, brand, model] = cols;
-
-      const card = document.createElement('div');
-      card.className = 'car-card';
-
-      card.innerHTML = `
-        <div class="image-row">
-          <div class="brand-image">
-            <img src="${brandImg}" alt="Brand Image Not Found" width="100">
-            <div class="brand-name">${brand}</div>
-          </div>
-          <div class="model-image">
-            <img src="${modelImg}" alt="Model Image Not Found" width="160">
-            <div class="model-name">${model}</div>
-          </div>
-        </div>
-
-        <div class="model-data">
-          <div class="item"><span class="label">Mileage:</span> <span class="value">${mileage}</span></div>
-          <div class="item"><span class="label">Ex-Showroom:</span> <span class="value">${exShow}</span></div>
-          <div class="item"><span class="label">RTO:</span> <span class="value">${rto}</span></div>
-          <div class="item"><span class="label">Insurance:</span> <span class="value">${insurance}</span></div>
-          <div class="item"><span class="label">Editinal:</span> <span class="value">${editinal}</span></div>
-          <hr class="divider">
-          <div class="item"><span class="label">Showroom Discount:</span> <span class="value">${showroomDisc}</span></div>
-          <div class="item"><span class="label">Brand Discount:</span> <span class="value">${brandDisc}</span></div>
-          <div class="item"><span class="label">Additional Discount:</span> <span class="value">${addDisc}</span></div>
-          <hr class="divider">
-          <div class="item"><span class="label">On-Road Price:</span> <span class="value">${onRoad}</span></div>
-        </div>
-      `;
-
-      container.appendChild(card);
-    });
+    document.getElementById("comparison-table").innerHTML = html.join("");
   })
-  .catch(err => {
-    console.error('Failed to fetch Google Sheet:', err);
-  });
+  .catch((err) => console.error("Error loading sheet:", err));
