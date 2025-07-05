@@ -32,6 +32,7 @@ fetch(SHEET_CSV_URL)
     <div class="item"><span class="label">RTO:</span> <span class="value">${rto}</span></div>
     <div class="item"><span class="label">Insurance:</span> <span class="value">${insurance}</span></div>
     <div class="item"><span class="label">Editinal:</span> <span class="value">${editinal}</span></div>
+    <hr class="divider">
     <div class="item"><span class="label">Showroom Discount:</span> <span class="value">${showroomDisc}</span></div>
     <div class="item"><span class="label">Brand Discount:</span> <span class="value">${brandDisc}</span></div>
     <div class="item"><span class="label">Additional Discount:</span> <span class="value">${addDisc}</span></div>
