@@ -17,20 +17,27 @@ fetch(SHEET_CSV_URL)
       card.className = 'car-card';
 
       card.innerHTML = `
-  <img src="${brandImg}" alt="Brand Image Not Found" width="60"><br>
-  <img src="${modelImg}" alt="Model Image Not Found" width="130"><br><br>
+  <div class="image-row">
+    <div class="brand-image">
+      <img src="${brandImg}" alt="Brand Image Not Found" width="100">
+    </div>
+    <div class="model-image">
+      <img src="${modelImg}" alt="Model Image Not Found" width="160">
+    </div>
+  </div>
 
-  <div class="item"><span class="label">Mileage:</span> <span class="value">${mileage}</span></div>
-  <div class="item"><span class="label">Ex-Showroom:</span> <span class="value">${exShow}</span></div>
-  <div class="item"><span class="label">RTO:</span> <span class="value">${rto}</span></div>
-  <div class="item"><span class="label">Insurance:</span> <span class="value">${insurance}</span></div>
-  <div class="item"><span class="label">Editinal:</span> <span class="value">${editinal}</span></div>
-  <div class="item"><span class="label">Showroom Discount:</span> <span class="value">${showroomDisc}</span></div>
-  <div class="item"><span class="label">Brand Discount:</span> <span class="value">${brandDisc}</span></div>
-  <div class="item"><span class="label">Additional Discount:</span> <span class="value">${addDisc}</span></div>
-  <div class="item"><span class="label">On-Road Price:</span> <span class="value">${onRoad}</span></div>
+  <div class="model-data">
+    <div class="item"><span class="label">Mileage:</span> <span class="value">${mileage}</span></div>
+    <div class="item"><span class="label">Ex-Showroom:</span> <span class="value">${exShow}</span></div>
+    <div class="item"><span class="label">RTO:</span> <span class="value">${rto}</span></div>
+    <div class="item"><span class="label">Insurance:</span> <span class="value">${insurance}</span></div>
+    <div class="item"><span class="label">Editinal:</span> <span class="value">${editinal}</span></div>
+    <div class="item"><span class="label">Showroom Discount:</span> <span class="value">${showroomDisc}</span></div>
+    <div class="item"><span class="label">Brand Discount:</span> <span class="value">${brandDisc}</span></div>
+    <div class="item"><span class="label">Additional Discount:</span> <span class="value">${addDisc}</span></div>
+    <div class="item"><span class="label">On-Road Price:</span> <span class="value">${onRoad}</span></div>
+  </div>
 `;
-
 
       container.appendChild(card);
     });
