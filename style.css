@@ -49,11 +49,11 @@ h1 {
 /* DATA layout */
 .item {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   margin-bottom: 8px;
   padding: 0 10px;
-  text-align: left;
 }
+
 
 .label {
   font-weight: bold;
