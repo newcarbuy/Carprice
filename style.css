@@ -58,9 +58,9 @@ h1 {
 .label {
   font-weight: bold;
   color: #333;
-  width: 160px;  /* 👈 fixed width for consistent alignment */
-  display: inline-block;
+  width: 50%;
 }
+
 .value {
   text-align: left;
   color: #222;
