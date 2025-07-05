@@ -18,13 +18,16 @@ fetch(SHEET_CSV_URL)
 
       card.innerHTML = `
   <div class="image-row">
-    <div class="brand-image">
-      <img src="${brandImg}" alt="Brand Image Not Found" width="100">
-    </div>
-    <div class="model-image">
-      <img src="${modelImg}" alt="Model Image Not Found" width="160">
-    </div>
+  <div class="brand-image">
+    <img src="${brandImg}" alt="Brand Image Not Found" width="100">
+    <div class="brand-name">${brand}</div>
   </div>
+  <div class="model-image">
+    <img src="${modelImg}" alt="Model Image Not Found" width="160">
+    <div class="model-name">${model}</div>
+  </div>
+</div>
+
 
   <div class="model-data">
     <div class="item"><span class="label">Mileage:</span> <span class="value">${mileage}</span></div>
