@@ -1,61 +1,59 @@
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Ps-g1wRp1Q1_i6lx9_u9zBaSQ61S-mvsKB5OKcZLTms/export?format=csv';
+const SHEET_CSV_URL =
+  "https://docs.google.com/spreadsheets/d/1Ps-g1wRp1Q1_i6lx9_u9zBaSQ61S-mvsKB5OKcZLTms/export?format=csv";
 
 fetch(SHEET_CSV_URL)
-  .then(res => res.text())
-  .then(csv => {
-    const rows = csv.trim().split('\n').map(r => r.split(','));
-    const data = rows.slice(1);
+  .then((res) => res.text())
+  .then((csv) => {
+    const rows = csv.trim().split("\n");
+    const data = rows.slice(1).map((row) => row.split(","));
 
+    // Group by brand
     const brandGroups = {};
-    data.forEach(row => {
-      const brand = row[11]; // ✅ brand name from column 12
+    data.forEach((d) => {
+      const brand = d[11]; // column L = brand
       if (!brandGroups[brand]) brandGroups[brand] = [];
-      brandGroups[brand].push(row);
+      brandGroups[brand].push(d);
     });
 
-    const container = document.getElementById('comparison-table');
+    const html = [];
+    const brandNames = Object.keys(brandGroups);
 
-    Object.entries(brandGroups).forEach(([brand, models]) => {
-      const section = document.createElement('div');
-      section.className = 'brand-section';
+    brandNames.forEach((brand) => {
+      const models = brandGroups[brand];
 
-      section.innerHTML = `<h2>${brand}</h2>`;
+      html.push(`<div class="brand-section">`);
+      html.push(`<h2>${brand}</h2>`);
+      html.push("<table>");
 
-      const table = document.createElement('table');
+      // Image row
+      html.push("<tr>");
+      html.push('<td class="feature-label">Image</td>');
+      html.push(models.map(m => `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`).join(""));
+      html.push("</tr>");
 
-      // Image + model name row
-      const imgRow = document.createElement('tr');
-      imgRow.innerHTML = `<td class="feature-label">Image</td>` + models.map(m => `
-        <td>
-          <img src="${m[1]}" class="model-img">
-          <div class="model-name">${m[12]}</div> <!-- ✅ model name from column 13 -->
-        </td>
-      `).join('');
-      table.appendChild(imgRow);
-
-      // Feature rows
+      // Features
       const features = [
-        ['Mileage', 2],
-        ['Ex-Showroom', 3],
-        ['RTO', 4],
-        ['Insurance', 5],
-        ['Editinal', 6],
-        ['Showroom Discount', 7],
-        ['Brand Discount', 8],
-        ['Additional Discount', 9],
-        ['On-Road Price', 10],
+        ["Mileage", 2],
+        ["Ex-Showroom", 3],
+        ["RTO", 4],
+        ["Insurance", 5],
+        ["Editinal", 6],
+        ["Showroom Discount", 7],
+        ["Brand Discount", 8],
+        ["Additional Discount", 9],
+        ["On-Road Price", 10]
       ];
 
       features.forEach(([label, index]) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td class="feature-label">${label}</td>` + models.map(m => `<td>${m[index]}</td>`).join('');
-        table.appendChild(row);
+        html.push('<tr class="feature-row">');
+        html.push(`<td class="feature-label">${label}</td>`);
+        html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
+        html.push("</tr>");
       });
 
-      section.appendChild(table);
-      container.appendChild(section);
+      html.push("</table></div>");
     });
+
+    document.getElementById("comparison-table").innerHTML = html.join("");
   })
-  .catch(err => {
-    console.error('Error fetching sheet:', err);
-  });
+  .catch((err) => console.error("Error loading sheet:", err));
