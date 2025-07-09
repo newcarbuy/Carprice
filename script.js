@@ -24,28 +24,29 @@ fetch(SHEET_CSV_URL)
       html.push(`<div class="brand-section">`);
       html.push(`<h2>${brand}</h2>`);
       html.push(`<table>`);
-html.push(`<colgroup>`);
-html.push(`<col style="width: 160px;">`); // 🔒 Fixed width for feature (sawal) column
-models.forEach(() => {
-  html.push(`<col style="width: 180px;">`); // 🔒 Fixed width for each model (jawab) column
-});
-html.push(`</colgroup>`);
+      
+      // 👉 Define fixed column widths using <colgroup>
+      html.push(`<colgroup>`);
+      html.push(`<col style="width: 160px;">`); // feature column (sawal)
+      models.forEach(() => {
+        html.push(`<col style="width: 180px;">`); // model column (jawab)
+      });
+      html.push(`</colgroup>`);
 
-
-      // Image row
+      // 🔷 Image Row
       html.push("<tr>");
       html.push('<td class="feature-label">Image</td>');
       html.push(
         models
           .map(
             (m) =>
-              `<td class="model-cell"><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`
+              `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`
           )
           .join("")
       );
       html.push("</tr>");
 
-      // Features
+      // 🔷 Feature Rows
       const features = [
         ["Mileage", 2],
         ["Ex-Showroom", 3],
@@ -63,7 +64,7 @@ html.push(`</colgroup>`);
         html.push(`<td class="feature-label">${label}</td>`);
         html.push(
           models
-            .map((m) => `<td class="model-cell">${m[index]}</td>`)
+            .map((m) => `<td>${m[index]}</td>`)
             .join("")
         );
         html.push("</tr>");
