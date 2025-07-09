@@ -23,7 +23,14 @@ fetch(SHEET_CSV_URL)
 
       html.push(`<div class="brand-section">`);
       html.push(`<h2>${brand}</h2>`);
-      html.push("<table>");
+      html.push(`<table>`);
+html.push(`<colgroup>`);
+html.push(`<col style="width: 160px;">`); // 🔒 Fixed width for feature (sawal) column
+models.forEach(() => {
+  html.push(`<col style="width: 180px;">`); // 🔒 Fixed width for each model (jawab) column
+});
+html.push(`</colgroup>`);
+
 
       // Image row
       html.push("<tr>");
