@@ -22,8 +22,9 @@ h2 {
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
+  table-layout: fixed; /* ✅ Fix layout based on set widths */
 }
+
 
 td {
   border: 1px solid #ccc;
