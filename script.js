@@ -42,7 +42,7 @@ fetch(SHEET_CSV_URL)
         models
           .map(
             (m) =>
-              `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`
+              `<td class="image-cell"><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`
           )
           .join("")
       );
