@@ -30,10 +30,7 @@ td {
   padding: 10px;
   text-align: center;
   vertical-align: middle;
-}
-
-td:not(.feature-label) {
-  width: 180px; /* ✅ Model column fixed width */
+  width: 160px;  /* ✅ Fixed as per your request */
 }
 
 
