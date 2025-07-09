@@ -45,11 +45,12 @@ fetch(SHEET_CSV_URL)
       ];
 
       features.forEach(([label, index]) => {
-        html.push('<tr class="feature-row">');
-        html.push(`<td class="feature-label">${label}</td>`);
-        html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
-        html.push("</tr>");
-      });
+  html.push('<tr class="feature-row">');
+  html.push(`<td class="feature-label">${label}</td>`); // 🔧 this adds the left-side question
+  html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
+  html.push("</tr>");
+});
+
 
       html.push("</table></div>");
     }
