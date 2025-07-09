@@ -16,10 +16,11 @@ h1 {
 h2 {
   font-size: 20px;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 table {
-  width: 50%;
+  width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
 }
@@ -30,20 +31,34 @@ td {
   text-align: center;
 }
 
+/* ✅ Feature label column (left side) */
 .feature-label {
   font-weight: bold;
   text-align: left;
-  width: 160px;
+  width: 200px;
   background-color: #f0f0f0;
   white-space: nowrap;
   padding-left: 10px;
 }
 
+/* ✅ Make left column always align left */
 .feature-row td:first-child {
   text-align: left;
 }
 
+/* ✅ Model name under image */
 .model-name {
   margin-top: 5px;
   font-weight: bold;
+  text-align: center;
+}
+
+/* ✅ Model image should fill the cell */
+.brand-section td img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
 }
