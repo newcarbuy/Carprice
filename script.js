@@ -10,14 +10,15 @@ fetch(SHEET_CSV_URL)
     // Group data by brand (column 11)
     const brandGroups = {};
     data.forEach((d) => {
-      const brand = d[11]; // brand column
+      const brand = d[11];
       if (!brandGroups[brand]) brandGroups[brand] = [];
       brandGroups[brand].push(d);
     });
 
     const html = [];
+    const brandNames = Object.keys(brandGroups);
 
-    for (const brand in brandGroups) {
+    brandNames.forEach((brand, brandIndex) => {
       const models = brandGroups[brand];
 
       html.push(`<div class="brand-section">`);
@@ -27,10 +28,17 @@ fetch(SHEET_CSV_URL)
       // Model image + name row
       html.push("<tr>");
       html.push('<td class="feature-label">Image</td>');
-      html.push(models.map(m => `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`).join(""));
+      html.push(
+        models
+          .map(
+            (m) =>
+              `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`
+          )
+          .join("")
+      );
       html.push("</tr>");
 
-      // Feature rows
+      // Define features
       const features = [
         ["Mileage", 2],
         ["Ex-Showroom", 3],
@@ -43,15 +51,20 @@ fetch(SHEET_CSV_URL)
         ["On-Road Price", 10]
       ];
 
+      // Only first brand shows the left labels
       features.forEach(([label, index]) => {
         html.push('<tr class="feature-row">');
-        html.push(`<td class="feature-label">${label}</td>`);  // ✅ Feature label cell
-        html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
+        if (brandIndex === 0) {
+          html.push(`<td class="feature-label">${label}</td>`);
+        } else {
+          html.push(`<td class="feature-label"></td>`);
+        }
+        html.push(models.map((m) => `<td>${m[index]}</td>`).join(""));
         html.push("</tr>");
       });
 
       html.push("</table></div>");
-    }
+    });
 
     document.getElementById("comparison-table").innerHTML = html.join("");
   })
