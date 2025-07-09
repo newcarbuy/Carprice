@@ -38,11 +38,14 @@ td {
 .feature-label {
   font-weight: bold;
   text-align: left;
-  width: 160px;
+  width: 160px; /* Fix width yahan set karo */
+  min-width: 160px;
+  max-width: 160px;
   background-color: #f0f0f0;
   white-space: nowrap;
   padding-left: 10px;
 }
+
 
 /* ✅ Make left column always align left */
 .feature-row td:first-child {
