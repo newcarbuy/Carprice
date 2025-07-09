@@ -22,51 +22,37 @@ h2 {
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; /* ✅ Fix layout based on set widths */
+  table-layout: fixed; /* 👈 This ensures fixed layout */
 }
-
 
 td {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
-  vertical-align: middle;
-  width: 160px;  /* ✅ Fixed as per your request */
 }
 
-
-/* ✅ Feature label column (left side) */
+/* ✅ Feature label column (first column - sawal) */
 .feature-label {
   font-weight: bold;
   text-align: left;
-  width: 160px; /* Fix width yahan set karo */
-  min-width: 160px;
-  max-width: 160px;
   background-color: #f0f0f0;
   white-space: nowrap;
   padding-left: 10px;
 }
 
-
-/* ✅ Make left column always align left */
+/* ✅ Make sure first cell (feature name) is left-aligned */
 .feature-row td:first-child {
   text-align: left;
 }
 
-/* ✅ Model name under image */
+/* ✅ Model name below image */
 .model-name {
   margin-top: 5px;
   font-weight: bold;
   text-align: center;
 }
-.model-cell {
-  width: 180px;
-  max-width: 180px;
-  word-wrap: break-word;
-}
 
-
-/* ✅ Model image should fill the cell */
+/* ✅ Image sizing inside model cells */
 .brand-section td img {
   width: 100%;
   max-width: 100%;
