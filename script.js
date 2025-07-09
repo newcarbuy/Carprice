@@ -20,18 +20,20 @@ fetch(SHEET_CSV_URL)
 
     brandNames.forEach((brand) => {
       const models = brandGroups[brand];
+      const brandImage = models[0][0]; // column A = brand logo
 
       html.push(`<div class="brand-section">`);
       html.push(`<h2>${brand}</h2>`);
+      html.push(`<img src="${brandImage}" alt="${brand} logo" class="brand-logo">`);
       html.push(`<div class="brand-table-wrapper">`);
       html.push(`<div class="brand-table-inner">`);
       html.push(`<table>`);
 
-      // Fixed column widths
+      // Define column widths
       html.push(`<colgroup>`);
-      html.push(`<col>`); // feature column (sawal)
+      html.push(`<col>`); // feature (sawal)
       models.forEach(() => {
-        html.push(`<col>`); // model columns (jawab)
+        html.push(`<col>`); // model (jawab)
       });
       html.push(`</colgroup>`);
 
@@ -42,13 +44,18 @@ fetch(SHEET_CSV_URL)
         models
           .map(
             (m) =>
-              `<td class="image-cell"><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`
+              `<td class="image-cell">
+                <div class="image-wrapper">
+                  <img src="${m[1]}" alt="Model Image">
+                  <div class="model-name">${m[12]}</div>
+                </div>
+              </td>`
           )
           .join("")
       );
       html.push("</tr>");
 
-      // Features rows
+      // Feature rows
       const features = [
         ["Mileage", 2],
         ["Ex-Showroom", 3],
@@ -64,13 +71,11 @@ fetch(SHEET_CSV_URL)
       features.forEach(([label, index]) => {
         html.push('<tr class="feature-row">');
         html.push(`<td class="feature-label">${label}</td>`);
-        html.push(
-          models.map((m) => `<td>${m[index]}</td>`).join("")
-        );
+        html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
         html.push("</tr>");
       });
 
-      html.push("</table></div></div></div>"); // Close inner + wrapper + brand-section
+      html.push("</table></div></div></div>"); // close all divs
     });
 
     document.getElementById("comparison-table").innerHTML = html.join("");
