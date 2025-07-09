@@ -38,7 +38,7 @@ h2 {
 .brand-section th {
   padding: 10px;
   border: none;
-  vertical-align: middle;
+  vertical-align: left;
 }
 
 .feature-label {
