@@ -1,4 +1,3 @@
-
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/1Ps-g1wRp1Q1_i6lx9_u9zBaSQ61S-mvsKB5OKcZLTms/export?format=csv";
 
@@ -8,10 +7,10 @@ fetch(SHEET_CSV_URL)
     const rows = csv.trim().split("\n");
     const data = rows.slice(1).map((row) => row.split(","));
 
-    // Group data by brand
+    // Group data by brand (column 11)
     const brandGroups = {};
     data.forEach((d) => {
-      const brand = d[11];
+      const brand = d[11]; // brand column
       if (!brandGroups[brand]) brandGroups[brand] = [];
       brandGroups[brand].push(d);
     });
@@ -25,7 +24,7 @@ fetch(SHEET_CSV_URL)
       html.push(`<h2>${brand}</h2>`);
       html.push("<table>");
 
-      // Model images
+      // Model image + name row
       html.push("<tr>");
       html.push('<td class="feature-label">Image</td>');
       html.push(models.map(m => `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`).join(""));
@@ -45,12 +44,11 @@ fetch(SHEET_CSV_URL)
       ];
 
       features.forEach(([label, index]) => {
-  html.push('<tr class="feature-row">');
-  html.push(`<td class="feature-label">${label}</td>`); // 🔧 this adds the left-side question
-  html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
-  html.push("</tr>");
-});
-
+        html.push('<tr class="feature-row">');
+        html.push(`<td class="feature-label">${label}</td>`);  // ✅ Feature label cell
+        html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
+        html.push("</tr>");
+      });
 
       html.push("</table></div>");
     }
