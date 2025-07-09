@@ -44,9 +44,11 @@ h2 {
 .feature-label {
   font-weight: bold;
   text-align: left;
-  width: 180px;
-  white-space: nowrap; /* ensures label doesn't wrap */
+  width: 200px;
+  padding-left: 10px;
+  white-space: nowrap;
 }
+
 
 .feature-row {
   border-bottom: 1px solid #ccc;
