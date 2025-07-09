@@ -55,6 +55,12 @@ td {
   font-weight: bold;
   text-align: center;
 }
+.model-cell {
+  width: 180px;
+  max-width: 180px;
+  word-wrap: break-word;
+}
+
 
 /* ✅ Model image should fill the cell */
 .brand-section td img {
