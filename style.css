@@ -1,9 +1,7 @@
-
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
-  background: #f4f4f4;
-  color: #222;
+  background: #f9f9f9;
 }
 
 h1 {
@@ -11,78 +9,41 @@ h1 {
   margin-bottom: 40px;
 }
 
-h2 {
-  font-size: 24px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  text-align: left;
-  color: #000;
-}
-
-#comparison-table {
-  width: 100%;
-  overflow-x: auto;
-}
-
 .brand-section {
   margin-bottom: 60px;
 }
 
-.brand-section table {
-  border-collapse: collapse;
-  width: 100%;
-  table-layout: fixed; /* ensures column widths are respected */
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.brand-section td,
-.brand-section th {
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+td {
+  border: 1px solid #ccc;
   padding: 10px;
-  border: none;
-  vertical-align: left;
+  text-align: center;
 }
 
 .feature-label {
   font-weight: bold;
   text-align: left;
   width: 200px;
-  padding-left: 10px;
+  background-color: #f0f0f0;
   white-space: nowrap;
-}
-
-
-.feature-row {
-  border-bottom: 1px solid #ccc;
-}
-
-.model-name {
-  margin-top: 8px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.brand-section td img {
-  height: 100px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 40px;
-}
-
-td {
-  padding: 8px 12px;
-  text-align: center;
+  padding-left: 10px;
 }
 
 .feature-row td:first-child {
   text-align: left;
 }
 
-
-.brand-section td {
-  text-align: center;
-  width: 180px;
+.model-name {
+  margin-top: 5px;
+  font-weight: bold;
 }
