@@ -26,16 +26,11 @@ fetch(SHEET_CSV_URL)
       html.push("<table>");
 
       // Image row
-      html.push("<tr>");
-      html.push('<td class="feature-label">Image</td>');
-      html.push(models.map(m => `<td>
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <img src="${m[1]}" alt="Model Image" style="width: 100%; height: auto;">
-    <div class="model-name">${m[12]}</div>
-  </div>
-</td>
-`).join(""));
-      html.push("</tr>");
+      html.push('<tr class="image-row">');
+html.push('<td class="feature-label">Image</td>');
+html.push(models.map(m => `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`).join(""));
+html.push("</tr>");
+
 
       // Features
       const features = [
