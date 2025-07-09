@@ -35,7 +35,7 @@ fetch(SHEET_CSV_URL)
 
       // Model names
       const modelNameRow = document.createElement('tr');
-      modelNameRow.innerHTML = `<td class="feature-label"></td>` + models.map(m => `<td class="model-title">${m[12]}</td>`).join('');
+      modelNameRow.innerHTML = `<td class="feature-label"></td>` + models.map(m => `<td class="model-title">${m[13]}</td>`).join('');
       table.appendChild(modelNameRow);
 
       // Model images row
