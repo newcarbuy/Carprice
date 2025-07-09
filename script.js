@@ -23,17 +23,19 @@ fetch(SHEET_CSV_URL)
 
       html.push(`<div class="brand-section">`);
       html.push(`<h2>${brand}</h2>`);
+      html.push(`<div class="brand-table-wrapper">`);
+      html.push(`<div class="brand-table-inner">`);
       html.push(`<table>`);
-      
-      // 👉 Define fixed column widths using <colgroup>
+
+      // Fixed column widths
       html.push(`<colgroup>`);
-      html.push(`<col style="width: 160px;">`); // feature column (sawal)
+      html.push(`<col>`); // feature column (sawal)
       models.forEach(() => {
-        html.push(`<col style="width: 180px;">`); // model column (jawab)
+        html.push(`<col>`); // model columns (jawab)
       });
       html.push(`</colgroup>`);
 
-      // 🔷 Image Row
+      // Image row
       html.push("<tr>");
       html.push('<td class="feature-label">Image</td>');
       html.push(
@@ -46,7 +48,7 @@ fetch(SHEET_CSV_URL)
       );
       html.push("</tr>");
 
-      // 🔷 Feature Rows
+      // Features rows
       const features = [
         ["Mileage", 2],
         ["Ex-Showroom", 3],
@@ -63,14 +65,12 @@ fetch(SHEET_CSV_URL)
         html.push('<tr class="feature-row">');
         html.push(`<td class="feature-label">${label}</td>`);
         html.push(
-          models
-            .map((m) => `<td>${m[index]}</td>`)
-            .join("")
+          models.map((m) => `<td>${m[index]}</td>`).join("")
         );
         html.push("</tr>");
       });
 
-      html.push("</table></div>");
+      html.push("</table></div></div></div>"); // Close inner + wrapper + brand-section
     });
 
     document.getElementById("comparison-table").innerHTML = html.join("");
