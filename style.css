@@ -19,25 +19,29 @@ h2 {
   text-align: left;
 }
 
-/* Scrollable container for model columns */
+.brand-logo {
+  height: 40px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Scrollable model section */
 .brand-table-wrapper {
   overflow-x: auto;
   width: 100%;
 }
 
-/* Minimum width ensures space even with few models */
 .brand-table-inner {
   display: inline-block;
-  min-width: calc(160px + 180px * 6); /* room for at least 6 models */
+  min-width: calc(160px + 180px * 6); /* Room for 6 models */
 }
 
-/* Table styling */
+/* Table styles */
 table {
   border-collapse: collapse;
   table-layout: fixed;
 }
 
-/* Column widths via <colgroup> */
 col:first-child {
   width: 160px;
 }
@@ -52,7 +56,7 @@ td {
   text-align: center;
 }
 
-/* Feature label column (sawal) */
+/* Feature (Sawal) column */
 .feature-label {
   font-weight: bold;
   text-align: left;
@@ -61,38 +65,17 @@ td {
   padding-left: 10px;
 }
 
-/* Align first column text left */
 .feature-row td:first-child {
   text-align: left;
 }
 
-/* Model name under image */
-.model-name {
-  position: absolute;
-  bottom: 5px; /* 👈 very bottom of cell */
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: bold;
-  text-align: center;
-  background: #fff;
-  padding: 2px 6px;
-}
-
-/* Model image styling */
-.brand-section td img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  object-fit: contain;
-}
-/* ✅ Make image column background white */
+/* Image cell (Jawab) */
 .image-cell {
   background-color: #ffffff;
   padding: 0;
   position: relative;
 }
+
 .image-wrapper {
   position: relative;
   height: 100%;
@@ -104,5 +87,16 @@ td {
   max-height: 120px;
   object-fit: contain;
   margin: 0 auto;
-  padding: 10px 0 30px; /* leave space at bottom for model name */
+  padding: 10px 0 30px; /* extra space for model name */
+}
+
+.model-name {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  text-align: center;
+  background: #fff;
+  padding: 2px 6px;
 }
