@@ -8,7 +8,7 @@ fetch(SHEET_CSV_URL)
     const rows = csv.trim().split("\n");
     const data = rows.slice(1).map((row) => row.split(","));
 
-    // Group data by brand (last column is assumed to be brand)
+    // Group data by brand
     const brandGroups = {};
     data.forEach((d) => {
       const brand = d[11];
@@ -21,20 +21,37 @@ fetch(SHEET_CSV_URL)
     for (const brand in brandGroups) {
       const models = brandGroups[brand];
 
+      html.push(`<div class="brand-section">`);
       html.push(`<h2>${brand}</h2>`);
       html.push("<table>");
-      html.push("<tr><th>Feature</th>" + models.map(m => "<th>" + m[12] + "</th>").join("") + "</tr>"); // model names
-      html.push("<tr><td>Image</td>" + models.map(m => "<td><img src='" + m[1] + "' class='model-img'></td>").join("") + "</tr>");
-      html.push("<tr><td>Mileage</td>" + models.map(m => "<td>" + m[2] + "</td>").join("") + "</tr>");
-      html.push("<tr><td>Ex-Showroom</td>" + models.map(m => "<td>" + m[3] + "</td>").join("") + "</tr>");
-      html.push("<tr><td>RTO</td>" + models.map(m => "<td>" + m[4] + "</td>").join("") + "</tr>");
-      html.push("<tr><td>Insurance</td>" + models.map(m => "<td>" + m[5] + "</td>").join("") + "</tr>");
-      html.push("<tr><td>Editinal</td>" + models.map(m => "<td>" + m[6] + "</td>").join("") + "</tr>");
-      html.push("<tr><td>Showroom Discount</td>" + models.map(m => "<td>" + m[7] + "</td>").join("") + "</tr>");
-      html.push("<tr><td>Brand Discount</td>" + models.map(m => "<td>" + m[8] + "</td>").join("") + "</tr>");
-      html.push("<tr><td>Additional Discount</td>" + models.map(m => "<td>" + m[9] + "</td>").join("") + "</tr>");
-      html.push("<tr><td>On-Road Price</td>" + models.map(m => "<td>" + m[10] + "</td>").join("") + "</tr>");
-      html.push("</table><br>");
+
+      // Model images
+      html.push("<tr>");
+      html.push('<td class="feature-label">Image</td>');
+      html.push(models.map(m => `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`).join(""));
+      html.push("</tr>");
+
+      // Feature rows
+      const features = [
+        ["Mileage", 2],
+        ["Ex-Showroom", 3],
+        ["RTO", 4],
+        ["Insurance", 5],
+        ["Editinal", 6],
+        ["Showroom Discount", 7],
+        ["Brand Discount", 8],
+        ["Additional Discount", 9],
+        ["On-Road Price", 10]
+      ];
+
+      features.forEach(([label, index]) => {
+        html.push('<tr class="feature-row">');
+        html.push(`<td class="feature-label">${label}</td>`);
+        html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
+        html.push("</tr>");
+      });
+
+      html.push("</table></div>");
     }
 
     document.getElementById("comparison-table").innerHTML = html.join("");
