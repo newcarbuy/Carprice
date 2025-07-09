@@ -64,6 +64,21 @@ h2 {
   display: block;
   margin: 0 auto;
 }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+td {
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.feature-row td:first-child {
+  text-align: left;
+}
+
 
 .brand-section td {
   text-align: center;
