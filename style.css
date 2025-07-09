@@ -21,6 +21,7 @@ h2 {
 
 #comparison-table {
   width: 100%;
+  overflow-x: auto;
 }
 
 .brand-section {
@@ -30,37 +31,40 @@ h2 {
 .brand-section table {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
 }
 
-.brand-section th,
-.brand-section td {
-  padding: 10px 15px;
-  text-align: center;
-  border: none;
-}
-
+.brand-section td,
 .brand-section th {
-  font-weight: bold;
-  font-size: 15px;
-  color: #000;
+  padding: 10px;
+  border: none;
+  vertical-align: middle;
 }
 
-.brand-section td img {
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 5px;
-}
-
-.model-name {
-  margin-top: 8px;
+.feature-label {
   font-weight: bold;
+  text-align: left;
+  width: 200px;
 }
 
 .feature-row {
   border-bottom: 1px solid #ccc;
 }
 
-.feature-label {
+.model-name {
+  margin-top: 8px;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
+}
+
+.brand-section td img {
+  height: 80px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.brand-section td {
+  text-align: center;
+  width: 180px;
 }
