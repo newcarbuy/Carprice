@@ -26,20 +26,22 @@ table {
 }
 
 td {
-  border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
+  border: 1px solid #ccc;
+  width: 160px;  /* ✅ Fix model column width */
 }
 
 /* ✅ Feature label column (left side) */
 .feature-label {
   font-weight: bold;
   text-align: left;
-  width: 160px;
+  width: 160px; /* left side labels */
   background-color: #f0f0f0;
   white-space: nowrap;
   padding-left: 10px;
 }
+
 
 /* ✅ Make left column always align left */
 .feature-row td:first-child {
@@ -56,10 +58,10 @@ td {
 
 /* ✅ Model image should fill the cell */
 .brand-section td img {
-  width: 50%;
-  max-width: 50%;
+  width: 100%;         /* Fill model column fully */
+  max-width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto;
   object-fit: contain;
 }
+
