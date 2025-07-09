@@ -28,7 +28,7 @@ fetch(SHEET_CSV_URL)
       // Image row
       html.push("<tr>");
       html.push('<td class="feature-label">Image</td>');
-      html.push(models.map(m => `<td><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`).join(""));
+      html.push(models.map(m => `<td class="model-cell"><img src="${m[1]}" alt="Model Image"><div class="model-name">${m[12]}</div></td>`).join(""));
       html.push("</tr>");
 
       // Features
@@ -47,7 +47,7 @@ fetch(SHEET_CSV_URL)
       features.forEach(([label, index]) => {
         html.push('<tr class="feature-row">');
         html.push(`<td class="feature-label">${label}</td>`);
-        html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
+        html.push(models.map(m => `<td class="model-cell">${m[index]}</td>`).join(""));
         html.push("</tr>");
       });
 
