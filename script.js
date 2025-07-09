@@ -1,65 +1,77 @@
-const SHEET_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/1Ps-g1wRp1Q1_i6lx9_u9zBaSQ61S-mvsKB5OKcZLTms/export?format=csv";
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Ps-g1wRp1Q1_i6lx9_u9zBaSQ61S-mvsKB5OKcZLTms/export?format=csv';
 
 fetch(SHEET_CSV_URL)
-  .then((res) => res.text())
-  .then((csv) => {
-    const rows = csv.trim().split("\n");
-    const data = rows.slice(1).map((row) => row.split(","));
+  .then(res => res.text())
+  .then(csv => {
+    const rows = csv.trim().split('\n').map(row => row.split(','));
 
-    // Group by brand
+    const header = rows[0];
+    const data = rows.slice(1);
+
     const brandGroups = {};
-    data.forEach((d) => {
-      const brand = d[11]; // column L = brand
-      if (!brandGroups[brand]) brandGroups[brand] = [];
-      brandGroups[brand].push(d);
+
+    data.forEach(row => {
+      const brand = row[2]; // assuming brand is at index 2
+      if (!brandGroups[brand]) {
+        brandGroups[brand] = [];
+      }
+      brandGroups[brand].push(row);
     });
 
-    const html = [];
-    const brandNames = Object.keys(brandGroups);
+    const container = document.getElementById('car-container');
 
-    brandNames.forEach((brand) => {
-      const models = brandGroups[brand];
+    Object.entries(brandGroups).forEach(([brand, models]) => {
+      const table = document.createElement('table');
+      table.className = 'car-table';
 
-      html.push(`<div class="brand-section">`);
-      html.push(`<h2>${brand}</h2>`);
-      html.push("<table>");
+      // Brand name row
+      const brandRow = document.createElement('tr');
+      const brandCell = document.createElement('td');
+      brandCell.colSpan = models.length + 1;
+      brandCell.className = 'brand-name';
+      brandCell.textContent = brand;
+      brandRow.appendChild(brandCell);
+      table.appendChild(brandRow);
 
-      // Image row
-      html.push('<tr class="image-row">');
-html.push('<td class="feature-label">Image</td>');
-html.push(models.map(m => `<td style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 150px;">
-  <img src="${m[1]}" alt="Model Image" style="max-width: 100%; height: auto;">
-  <div class="model-name">${m[12]}</div>
-</td>
+      // Model names
+      const modelNameRow = document.createElement('tr');
+      modelNameRow.innerHTML = `<td class="feature-label"></td>` + models.map(m => `<td class="model-title">${m[12]}</td>`).join('');
+      table.appendChild(modelNameRow);
 
-`).join(""));
-html.push("</tr>");
+      // Model images row
+      const imageRow = document.createElement('tr');
+      imageRow.innerHTML = `<td class="feature-label">Image</td>` + models.map(m =>
+        `<td>
+           <div style="display: flex; flex-direction: column; align-items: center;">
+             <img src="${m[1]}" alt="Model Image" style="max-width: 100%; height: auto;">
+           </div>
+         </td>`
+      ).join('');
+      table.appendChild(imageRow);
 
-
-      // Features
+      // Feature labels
       const features = [
-        ["Mileage", 2],
-        ["Ex-Showroom", 3],
-        ["RTO", 4],
-        ["Insurance", 5],
-        ["Editinal", 6],
-        ["Showroom Discount", 7],
-        ["Brand Discount", 8],
-        ["Additional Discount", 9],
-        ["On-Road Price", 10]
+        { label: "Mileage", index: 2 },
+        { label: "Ex-Showroom", index: 3 },
+        { label: "RTO", index: 4 },
+        { label: "Insurance", index: 5 },
+        { label: "Editinal", index: 6 },
+        { label: "Showroom Discount", index: 7 },
+        { label: "Brand Discount", index: 8 },
+        { label: "Additional Discount", index: 9 },
+        { label: "On-Road Price", index: 10 }
       ];
 
-      features.forEach(([label, index]) => {
-        html.push('<tr class="feature-row">');
-        html.push(`<td class="feature-label">${label}</td>`);
-        html.push(models.map(m => `<td>${m[index]}</td>`).join(""));
-        html.push("</tr>");
+      features.forEach(feature => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td class="feature-label">${feature.label}</td>` +
+          models.map(m => `<td>${m[feature.index]}</td>`).join('');
+        table.appendChild(row);
       });
 
-      html.push("</table></div>");
+      container.appendChild(table);
     });
-
-    document.getElementById("comparison-table").innerHTML = html.join("");
   })
-  .catch((err) => console.error("Error loading sheet:", err));
+  .catch(err => {
+    console.error('Failed to fetch data from Google Sheets:', err);
+  });
