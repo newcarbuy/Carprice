@@ -29,7 +29,13 @@ td {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
+  vertical-align: middle;
 }
+
+td:not(.feature-label) {
+  width: 180px; /* ✅ Model column fixed width */
+}
+
 
 /* ✅ Feature label column (left side) */
 .feature-label {
