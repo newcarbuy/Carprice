@@ -82,3 +82,8 @@ td {
   margin: 0 auto;
   object-fit: contain;
 }
+/* ✅ Make image column background white */
+.image-cell {
+  background-color: #ffffff;
+}
+
