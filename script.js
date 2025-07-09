@@ -28,10 +28,11 @@ fetch(SHEET_CSV_URL)
       // Image row
       html.push('<tr class="image-row">');
 html.push('<td class="feature-label">Image</td>');
-html.push(models.map(m => `<td style="display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%;">
+html.push(models.map(m => `<td style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 150px;">
   <img src="${m[1]}" alt="Model Image" style="max-width: 100%; height: auto;">
   <div class="model-name">${m[12]}</div>
 </td>
+
 `).join(""));
 html.push("</tr>");
 
