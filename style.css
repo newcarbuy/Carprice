@@ -64,4 +64,8 @@ td {
   display: block;
   object-fit: contain;
 }
+/* ✅ Make only the image row background white */
+.image-row {
+  background-color: #ffffff;
+}
 
