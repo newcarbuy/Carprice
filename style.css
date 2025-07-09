@@ -68,9 +68,14 @@ td {
 
 /* Model name under image */
 .model-name {
-  margin-top: 5px;
+  position: absolute;
+  bottom: 5px; /* 👈 very bottom of cell */
+  left: 50%;
+  transform: translateX(-50%);
   font-weight: bold;
   text-align: center;
+  background: #fff;
+  padding: 2px 6px;
 }
 
 /* Model image styling */
@@ -85,5 +90,19 @@ td {
 /* ✅ Make image column background white */
 .image-cell {
   background-color: #ffffff;
+  padding: 0;
+  position: relative;
+}
+.image-wrapper {
+  position: relative;
+  height: 100%;
 }
 
+.image-wrapper img {
+  display: block;
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  margin: 0 auto;
+  padding: 10px 0 30px; /* leave space at bottom for model name */
+}
